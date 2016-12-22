@@ -53,3 +53,27 @@ console.log(missingNo(arr1))
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+
+// accum("abcd");    // "A-Bb-Ccc-Dddd"
+// accum("RqaEzty"); // "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt");    // "C-Ww-Aaa-Tttt"
+
+function accum(s) {
+  var arr = s.split(''),
+      arr2 = [];
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j <= i; j++) {
+      arr2.push(arr[i]);
+    }
+    if (i < arr.length - 1) {arr2.push('-')}
+  }
+  var result = arr2.join('').split('-')
+  return result.map(x => x[0].toUpperCase() + x.slice(1).toLowerCase() + '-').join('').slice(0, -1);
+}
+//slimmed down
+function accum(s) {
+  return s.split('').map((x,index) => x.toUpperCase()+Array(index+1).join(x.toLowerCase())).join('-');
+}
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////

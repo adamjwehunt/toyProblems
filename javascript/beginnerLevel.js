@@ -80,7 +80,22 @@ console.log(addItem(list, 'fruit'));
 //FizzBuzz
 //Log 1 through 100. with numbers divisible by 3 = fizz, by 5 = buzz and by both = fizzbuzz.
 function fizzBuzz() {
-  for( var i = 1; i < 101; i++ ){
+  for (var i=1; i <= 100; i++) {
+    if (i % 15 === 0) {
+        console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+        console.log("Fizz");
+    } else if (i % 5 === 0) {
+        console.log("Buzz");
+    } else {
+        console.log(i);
+    }
+  }
+}
+
+//slimmed down
+function fizzBuzz() {
+  for (var i = 1; i <= 100; i++) {
     console.log([i,"fizz","buzz","fizzbuzz"][(i%3===0)+2*(i%5===0)]);
   }
 }
