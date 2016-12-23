@@ -196,3 +196,34 @@ function getMiddle(s) {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+//Highest and Lowest
+// In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+
+function highAndLow(numbers){
+  var a = numbers.split(' ').sort((a,b)=>b-a);
+  return [a[0], a[a.length-1]].join(' ');
+}
+
+//math.max and math.min methods
+function highAndLow(numbers) {
+  var arr = numbers.split(" ");
+  return Math.max.apply(null, arr) + ' ' + Math.min.apply(null, arr);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Your task is to make a function that can take any non-negative integer as a argument and return it with it's digits in descending order. Descending order means that you take the highest digit and place the next highest digit immediately after it.
+
+function descendingOrder(n){
+  return parseInt(n.toString().split('').sort((a,b)=>b-a).join(''));
+}
+
+//alternative
+function descendingOrder(n){
+  return parseInt(String(n).split('').sort().reverse().join(''))
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
