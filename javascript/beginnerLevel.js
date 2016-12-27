@@ -227,3 +227,149 @@ function descendingOrder(n){
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+
+function DNAStrand(dna){
+  return dna.split('').map(x=>{
+     switch (x) {
+      case 'A': return 'T';
+      case 'T': return 'A';
+      case 'G': return 'C';
+      case 'C': return 'G';
+    }}).join('');
+}
+
+//slimmed down
+var pairs = {'A':'T','T':'A','C':'G','G':'C'};
+
+function DNAStrand(dna){
+  return dna.split('').map(function(v){ return pairs[v] }).join('');
+}
+
+//regex
+function DNAStrand(dna) {
+  return dna.replace(/./g, function(c) {
+    return DNAStrand.pairs[c]
+  })
+}
+
+DNAStrand.pairs = {
+  A: 'T',
+  T: 'A',
+  C: 'G',
+  G: 'C',
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Given two integers, which can be positive and negative, find the sum of all the numbers between including them too and return it. If both numbers are equal return a or b.
+
+function GetSum(a,b) {
+  var nums = [];
+  if (b > a) {
+    for (var i=a;i <= b; i++) {
+      nums.push(i);
+    }
+  } else {
+    for (var i=b;i <= a; i++) {
+      nums.push(i);
+    }
+  }
+  return a===b ? a : nums.reduce((a,b)=> a + b, 0);
+}
+
+//alt
+function GetSum( a,b ) {
+   if (a == b) return a;
+   else if (a < b) return a + GetSum(a+1, b);
+   else return a + GetSum(a-1,b);
+}
+
+//alt
+const GetSum = (a, b) => {
+  let min = Math.min(a, b),
+      max = Math.max(a, b);
+  return (max - min + 1) * (min + max) / 2;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Return the number (count) of vowels in the given string.
+//
+// We will consider a, e, i, o, and u as vowels.
+
+function getCount(str) {
+  var vowelsCount = 0,
+      vowels = ['a','e','i','o','u'];
+  str.split('').map(x=>{if (vowels.includes(x)){vowelsCount+=1}})
+  return vowelsCount;
+}
+
+//regex
+function getCount(str) {
+  return (str.match(/[aeiou]/ig)||[]).length;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Welcome. In this kata, you are asked to square every digit of a number.
+//
+// For example, if we run 9119 through the function, 811181 will come out.
+
+function squareDigits(num){
+  return parseInt(num.toString().split('').map(x=>(parseInt(x)*parseInt(x))).join(''))
+}
+
+//alt
+function squareDigits(num){
+  return Number(('' + num).split('').map(function (val) { return val * val;}).join(''));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// exOh
+// Have the function exOh(str) take the str parameter being passed and return true if there is an equal number of x's and o's, otherwise return false. Only these two letters will be entered in the string, no punctuation or numbers. For example: if str is "xooxxxxooxo" then the output should return false because there are 6 x's and 5 o's.
+
+function XO(str) {
+  var x = str.split('').filter(i=>i.toLowerCase()==='x');
+  var o = str.split('').filter(i=>i.toLowerCase()==='o');
+  return x.length===o.length;
+}
+//test
+var xo = 'xoxoxoxoxoxo';
+var xox = 'xxooxxoox';
+console.log(exOh(xo));
+console.log(exOh(xox));
+
+//alt
+function XO(str) {
+  let x = str.match(/x/gi);
+  let o = str.match(/o/gi);
+  return (x && x.length) === (o && o.length);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+function isIsogram(str){
+  var letters = str.toLowerCase().split(''),
+      results = [];
+  for (var i=0; i < letters.length; i++) {
+    results.push(letters.indexOf(letters[i])<i)
+  }
+  return results.indexOf(true)>-1?false:true
+}
+
+//regex
+function isIsogram(str){
+  return !/(\w).*\1/i.test(str)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
