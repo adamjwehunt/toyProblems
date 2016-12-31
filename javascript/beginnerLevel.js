@@ -8,7 +8,7 @@
 // Example [1,-4,7,12] => 1 + 7 + 12 = 20
 //
 // Note: array may be empty, in this case return 0.
-
+//my answer
 function positiveSum(arr) {
   var sum = 0;
   for (i = 0; i < arr.length; i++) {
@@ -34,6 +34,7 @@ positiveSum([])//0
 ////////////////////////////////////////////////////////////////////////////////
 //letterCapitalize
 // Have the function letterCapitalize(str) take the str parameter being passed, capitalize the first letter of each word, and return the altered string. Words will be separated by only one space.
+//my answer
 function letterCapitalize(str) {
   var arr = str.split(' ');
   var result = arr.map(i=>i[0].toUpperCase() + i.slice(1));
@@ -56,7 +57,7 @@ console.log(letterCapitalize(sntc));
 //Write a function called removeItem that is given two arguments, the first is an array called myGroceryList, and the second is an item to remove from myGroceryList. If the second argument (the item to remove) matches an item in myGroceryList, remove that item from your grocery list and return the new, updated grocery list.
 
 var list = ['milk','cheese', 'meat', 'eggs'];
-//Code Here
+//my answer
 function removeItem(myGroceryList, item) {
   	return myGroceryList.filter(i=>i !== item);
 }
@@ -64,7 +65,7 @@ function removeItem(myGroceryList, item) {
 console.log(removeItem(list, 'cheese'));
 
 //Once you do that, write another function called addItem that is given two arguments, the first is myGroceryList and the second is an item to add to your grocery list. If the item is already in the grocery list, do not add it a second time. If it's not in the list, then add it and return the new list.
-//Code Here
+//my answer
 function addItem(myGroceryList, item) {
 	var result = myGroceryList.filter(i=>i !== item);
 	result.push(item);
@@ -79,6 +80,7 @@ console.log(addItem(list, 'fruit'));
 
 //FizzBuzz
 //Log 1 through 100. with numbers divisible by 3 = fizz, by 5 = buzz and by both = fizzbuzz.
+//my answer
 function fizzBuzz() {
   for (var i=1; i <= 100; i++) {
     if (i % 15 === 0) {
@@ -104,6 +106,7 @@ function fizzBuzz() {
 
 ////////////////////////////////////////////////////////////////////////////////
 // For loops are especially useful when combined with arrays. Create an empty array called myArray, then create a function called arrayFiller that takes one parameter (the parameter will be a number). Then fill myArray with the string "item" the number of times indicated by the parameter. Return the filled array. For example if I were to call arrayFiller(2) I would expect the return value to be ["item","item"] .
+//my answer
 function arrayFiller(num) {
 return Array(num).fill('item')
 }
@@ -115,6 +118,7 @@ var myArray = arrayFiller(3)
 ////////////////////////////////////////////////////////////////////////////////
 // Maker 25
 // Fill an array with the numbers 1 to 25.
+//my answer
 function maker() {
  return [...Array(25).keys()].map(i => i+1);
 }
@@ -124,6 +128,7 @@ function maker() {
 ////////////////////////////////////////////////////////////////////////////////
 // Looper
 // Create a function called "looper" that when passed an array of numbers will increment each value in the array by 5 and then return the updated array. For example: if the looper function were to be passed [ 2, 7 ] it should return [ 7, 12 ]
+//my answer
 function looper(arr){
   return arr.map(i=>i+5);
 }
@@ -133,6 +138,7 @@ function looper(arr){
 ////////////////////////////////////////////////////////////////////////////////
 // findInArray
 // Write a function called 'findInArray' that takes in two parameters, the first representing the array to be searched and the second representing the value to be searched for. Return true if the value exists in the array. If it doesn't exist return false.
+//my answer
 function findInArray(arr, num) {
   return arr.find(i=>i===num)?true:false;
 }
@@ -143,6 +149,7 @@ function findInArray(arr, num) {
 // oddsAndEvens
 //Write a function below called "oddsAndEvens" that loops through a parameter "nums" (an array).
 //for each number in the given array, if it is even, it is added to the evens array, if the number is odd, is added to the odds array.
+//my answer
 var evens = [];
 var odds = [];
 
@@ -154,6 +161,7 @@ function oddsAndEvens(nums) {
 
 ////////////////////////////////////////////////////////////////////////////////
 // Create a function called exponent that takes in two parameters, the first parameter should represent a number to be multiplied against itself and the second parameter should represent how many times it is multiplied by itself. The function should return the result of this operation. exponent(2,3) should return 8
+//my answer
 function pow(x,y) {
   var result = 1;
   for (var i = 1; i <= y; i++) {
@@ -172,6 +180,7 @@ function exponent(a,b){
 ////////////////////////////////////////////////////////////////////////////////
 // Even Finder & Odd Finder
 // Create a function called evenFinder that takes an array as an argument and returns an array with all of the odd numbers removed.
+//my answer
 function evenFinder(arr){
  return arr.filter(i=>i%2===0)
 }
@@ -184,6 +193,7 @@ function oddFinder(arr){
 ////////////////////////////////////////////////////////////////////////////////
 // Get the Middle Character
 // You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+//my answer
 function getMiddle(s) {
   return (s.length % 2) ? s[Math.floor(s.length/2)] : s[s.length/2 - 1] + s[s.length/2]
 }
@@ -198,7 +208,7 @@ function getMiddle(s) {
 ////////////////////////////////////////////////////////////////////////////////
 //Highest and Lowest
 // In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
-
+//my answer
 function highAndLow(numbers){
   var a = numbers.split(' ').sort((a,b)=>b-a);
   return [a[0], a[a.length-1]].join(' ');
@@ -228,7 +238,7 @@ function descendingOrder(n){
 
 ////////////////////////////////////////////////////////////////////////////////
 // In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
-
+//my answer
 function DNAStrand(dna){
   return dna.split('').map(x=>{
      switch (x) {
@@ -264,7 +274,7 @@ DNAStrand.pairs = {
 
 ////////////////////////////////////////////////////////////////////////////////
 // Given two integers, which can be positive and negative, find the sum of all the numbers between including them too and return it. If both numbers are equal return a or b.
-
+//my answer
 function GetSum(a,b) {
   var nums = [];
   if (b > a) {
@@ -299,7 +309,7 @@ const GetSum = (a, b) => {
 // Return the number (count) of vowels in the given string.
 //
 // We will consider a, e, i, o, and u as vowels.
-
+//my answer
 function getCount(str) {
   var vowelsCount = 0,
       vowels = ['a','e','i','o','u'];
@@ -318,7 +328,7 @@ function getCount(str) {
 // Welcome. In this kata, you are asked to square every digit of a number.
 //
 // For example, if we run 9119 through the function, 811181 will come out.
-
+//my answer
 function squareDigits(num){
   return parseInt(num.toString().split('').map(x=>(parseInt(x)*parseInt(x))).join(''))
 }
@@ -333,7 +343,7 @@ function squareDigits(num){
 ////////////////////////////////////////////////////////////////////////////////
 // exOh
 // Have the function exOh(str) take the str parameter being passed and return true if there is an equal number of x's and o's, otherwise return false. Only these two letters will be entered in the string, no punctuation or numbers. For example: if str is "xooxxxxooxo" then the output should return false because there are 6 x's and 5 o's.
-
+//my answer
 function XO(str) {
   var x = str.split('').filter(i=>i.toLowerCase()==='x');
   var o = str.split('').filter(i=>i.toLowerCase()==='o');
@@ -356,6 +366,7 @@ function XO(str) {
 
 ////////////////////////////////////////////////////////////////////////////////
 // An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+//my answer
 function isIsogram(str){
   var letters = str.toLowerCase().split(''),
       results = [];
@@ -377,7 +388,7 @@ function isIsogram(str){
 // Complete the findNextSquare method that finds the next integral perfect square after the one passed as a parameter. Recall that an integral perfect square is an integer n such that sqrt(n) is also an integer.
 //
 // If the parameter is itself not a perfect square, than -1 should be returned. You may assume the parameter is positive.
-
+//my answer
 function findNextSquare(sq) {
   var root = Math.sqrt(sq);
   return root % 1 === 0 ? Math.pow(root+1, 2) : -1;
@@ -386,11 +397,39 @@ function findNextSquare(sq) {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
+//
+// Your task is to write a function maskify, which changes all but the last four characters into '#'.
+//my answer
+function maskify(cc) {
+  return cc === '1'||'' ? cc : Array(cc.slice(0,-4).length + 1).join('#') + cc.slice(-4);
+}
+
+//regex
+function maskify(cc) {
+  return cc.slice(0, -4).replace(/./g, '#') + cc.slice(-4);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Create a function that returns the sum of the two lowest positive numbers given an array of minimum 4 integers. No floats or empty arrays will be passed.
+//
+// For example, when an array is passed like [19,5,42,2,77], the output should be 7.
+//
+// [10,343445353,3453445,3453545353453] should return 3453455.
+//my answer
+function sumTwoSmallestNumbers(nums) {
+  var min = Math.min(...nums),
+      indexOfMin = nums.indexOf(min);
+  return min + Math.min(...nums.slice(0, indexOfMin), ...nums.slice(indexOfMin + 1))
+};
 
+//slimmed down
+function sumTwoSmallestNumbers(nums) {
+  nums = nums.sort((a,b)=>a-b);
+  return nums[0]+nums[1]
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 
