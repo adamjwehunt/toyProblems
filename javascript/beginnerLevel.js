@@ -498,10 +498,49 @@ function solution(pairs){
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed. Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+function spinWords(s){
+  return s
+  .split(' ')
+  .map(x=>x.length>=5?x.split('').reverse().join(''):x)
+  .join(' ');
+}
+
+//regex
+function spinWords(s){
+  return s.replace(/\w{5,}/g, w=>w.split('').reverse().join(''))
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+//
+// Implement a function likes :: [String] -> String, which must take in input array, containing the names of people who like an item. It must return the display text
+
+function likes(names) {
+  var l = names.length;
+  return
+  l===0 ? 'no one likes this' :
+  l===1 ? names[0] + ' likes this' :
+  l===2 ? names.join(' and ') + ' like this' :
+  l===3 ? names[0] + ', ' + names.slice(1).join(' and ') + ' like this' :
+  names.slice(0,2).join(', ') + ' and ' + (names.length - 2) + ' others like this'
+}
+
+//favorite codewars answer
+function likes(names) {
+  return {
+    0: 'no one likes this',
+    1: `${names[0]} likes this`,
+    2: `${names[0]} and ${names[1]} like this`,
+    3: `${names[0]}, ${names[1]} and ${names[2]} like this`,
+    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`,
+  }[Math.min(4, names.length)]
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
