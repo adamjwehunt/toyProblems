@@ -540,19 +540,77 @@ function likes(names) {
   }[Math.min(4, names.length)]
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// In this kata, you must create a digital root function.
+//
+// A digital root is the recursive sum of all the digits in a number. Given n, take the sum of the digits of n. If that value has two digits, continue reducing in this way until a single-digit number is produced. This is only applicable to the natural numbers.
+
+function digital_root(n) {
+  var x = n.toString().split('').reduce((a,b)=>parseInt(a)+parseInt(b),0);
+  return x.toString().length===1? x : digital_root(x);
+}
+
+//top codewars
+function digital_root(n) {
+  return (n - 1) % 9 + 1;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+
+function isValidWalk(walk) {
+  var n = [],
+      s = [],
+      e = [],
+      w = [];
+  walk.map(x=>{
+    if (x==='n') { n.push(x)
+    } else if (x==='s') { s.push(x)
+    } else if (x==='e') { e.push(x)
+    } else if (x==='w') { w.push(x)
+    }
+  })
+  return walk.length===10 && n.length===s.length && e.length===w.length;
+}
+
+//my favorite amswer
+
+function isValidWalk(walk) {
+  function count(val) {
+    return walk.filter(x=>x===val).length;
+  }
+  return walk.length==10 && count('n')==count('s') && count('w')==count('e');
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Your goal in this kata is to implement an difference function, which subtracts one list from another.
+//
+// It should remove all values from list a, which are present in list b.
+//
+// difference([1,2],[1]) == [2]
+// If a value is present in b, all of its occurrences must be removed from the other:
+//
+// difference([1,2,2,2,3],[2]) == [1,3]
+
+function array_diff(a, b) {
+  return a.filter(x=>x!==b[0])
+}
+//supports anysize array for the b paramater
+function array_diff(a, b) {
+  return a.filter(x=>b.indexOf(x)===-1)
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
