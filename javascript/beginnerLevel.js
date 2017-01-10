@@ -609,11 +609,54 @@ function array_diff(a, b) {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Polycarpus works as a DJ in the best Berland nightclub, and he often uses dubstep music in his performance. Recently, he has decided to take a couple of old songs and make dubstep remixes from them.
+//
+// Let's assume that a song consists of some number of words. To make the dubstep remix of this song, Polycarpus inserts a certain number of words "WUB" before the first word of the song (the number may be zero), after the last word (the number may be zero), and between words (at least one between any pair of neighbouring words), and then the boy glues together all the words, including "WUB", in one string and plays the song at the club.
+//
+// For example, a song with words "I AM X" can transform into a dubstep remix as "WUBWUBIWUBAMWUBWUBX" and cannot transform into "WUBWUBIAMWUBX".
 
+function songDecoder(s){
+  return s.split('WUB').map(x=>!x?'':x+' ').join('').slice(0,-1)
+}
+
+//regex
+function songDecoder(song){
+  return song.replace(/(WUB)+/g," ").trim()
+}
+
+//another good answer
+function songDecoder(song){
+  return song.split('WUB').filter(Boolean).join(' ');
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+// createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+//novice, but first thought
+function createPhoneNumber(n){
+  return "("+n[0]+n[1]+n[2]+") "+n[3]+n[4]+n[5]+"-"+n[6]+n[7]+n[8]+n[9]
+}
+
+//second thought
+function createPhoneNumber(n){
+  return "("+n.slice(0,3).join('')+") "+n.slice(3, 6).join('')+"-"+n.slice(6).join('')
+}
+//best practice
+function createPhoneNumber(numbers){
+  numbers = numbers.join('');
+  return '(' + numbers.substring(0, 3) + ') '
+      + numbers.substring(3, 6)
+      + '-'
+      + numbers.substring(6);
+}
+//regex answer
+function createPhoneNumber(numbers){
+  return numbers.join('').replace(/(...)(...)(.*)/, '($1) $2-$3');
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
