@@ -710,31 +710,210 @@ function isTriangle(a,b,c){
 // ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
 //
 // If the function is passed a valid PIN string, return true, else return false.
+function validatePIN (pin) {
+  return (pin.length===4||pin.length===6)&&(pin.split('').filter(x=>x>-1).join('')===pin)
+}
 
+//slimmed downfunction validatePIN (pin) {
+function validatePIN (pin) {
+  return  (pin.length===4||pin.length===6) && parseInt(pin) == pin
+}
 
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
+//regex
+function validatePIN(pin) {
+  return /^(\d{4}|\d{6})$/.test(pin)
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Given an array of integers, remove the smallest value. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.
+//
+// Don't change the order of the elements that are left.
+
+function removeSmallest(n) {
+  var result = n[0]
+  for (var i = 1; i < n.length; i++) {
+    if (n[i]<result) {
+      result = n[i]
+    }
+  }
+  n.splice(n.indexOf(result),1)
+  return n
+}
+
+//Math.min..
+
+function removeSmallest(numbers) {
+  if(!numbers)return [];
+  var min=Math.min.apply(null,numbers);
+  numbers.splice(numbers.indexOf(min),1);
+  return numbers;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// n a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to p = 1200 inhabitants?
+// At the end of the first year there will be:
+// 1000 + 1000 * 0.02 + 50 => 1070 inhabitants
+//
+// At the end of the 2nd year there will be:
+// 1070 + 1070 * 0.02 + 50 => 1141 inhabitants (number of inhabitants is an integer)
+//
+// At the end of the 3rd year there will be:
+// 1141 + 1141 * 0.02 + 50 => 1213
+//
+// It will need 3 entire years.
+
+function nbYear(p0, percent, aug, p) {
+  var currentP = p0, result = 0;
+  for (var i = 1; currentP <= p; i++) {
+    currentP += currentP * (percent*.01) + aug;
+    if (currentP>=p) {return i}
+  }
+}
+
+//slimmed down
+function nbYear(p0, percent, aug, p) {
+  for (var i = 0; p0 < p; i++) {
+    p0 += p0 * (percent*.01) + aug;
+  }
+  return i
+}
 
 ////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Take 2 strings s1 and s2 including only letters from ato z. Return a new sorted string, the longest possible, containing distinct letters, - each taken only once - coming from s1 or s2.
+function longest(s1, s2) {
+  var s3 = (s1 + s2).split('');
+  return s3.filter((x,i)=>{
+      return (s3.slice(0,i).indexOf(x)===-1)
+    }).sort().join('')
+}
+
+//es6
+const longest = (s1, s2) => [...new Set(s1+s2)].sort().join('')
+
+//sort first then check for the index behind it..MY FAVORITE
+function longest(s1, s2) {
+  return (s1+s2).split('').sort().filter((a,b,c)=>a!==c[b-1]).join('');
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Your task is to write a function which returns the sum of following series upto nth term(parameter).
+//
+// Series: 1 + 1/4 + 1/7 + 1/10 + 1/13 + 1/16 +...
+// ex: SeriesSum(1) => 1 = "1"
+// SeriesSum(2) => 1 + 1/4 = "1.25"
+// SeriesSum(5) => 1 + 1/4 + 1/7 + 1/10 + 1/13 = "1.57"
+
+function SeriesSum(n){
+  var result = 0, x = 1;
+  for (var i=0; i<n; i++) {
+    result += 1/x
+    x=x+3
+  }
+  return result.toFixed(2).toString();
+}
+
+//slimmed down
+function SeriesSum(n) {
+  var result = 0;
+  for (var i = 0; i < n; i++) {
+    result += 1/(1 + i * 3)
+  }
+  return result.toFixed(2)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Given the triangle of consecutive odd numbers:
+//
+//              1
+//           3     5
+//        7     9    11
+//    13    15    17    19
+// 21    23    25    27    29
+// ...
+// Calculate the row sums of this triangle from the row index (starting at index 1) e.g.:
+//
+// rowSumOddNumbers(1); // 1
+// rowSumOddNumbers(2); // 3 + 5 = 8
+
+//first answe
+function rowSumOddNumbers(n) {
+  var result = 0,
+      s = 1;
+  for (var j=1; j<n; j++) {
+    s += j * 2
+  }
+  for (var i=0; i<n; i++){
+    result += s + 2 * i
+  }
+  return result
+}
+
+//DUH!
+function rowSumOddNumbers(n) {
+  return Math.pow(n, 3);
+}
+
+//es6
+let rowSumOddNumbers = n => n ** 3;
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Mr. Scrooge has a sum of money 'P' that wants to invest, and he wants to know how many years 'Y' this sum has to be kept in the bank in order for this sum of money to amount to 'D'.
+//
+// The sum is kept for 'Y' years in the bank where interest 'I' is paid yearly, and the new sum is re-invested yearly after paying tax 'T'
+//
+// Note that the principal is not taxed but only the year's accrued interest
+//
+// Example:
+//
+//   Let P be the Principal = 1000.00
+//   Let I be the Interest Rate = 0.05
+//   Let T be the Tax Rate = 0.18
+//   Let D be the Desired Sum = 1100.00
+//
+//
+// After 1st Year -->
+//   P = 1041.00
+// After 2nd Year -->
+//   P = 1083.86
+// After 3rd Year -->
+//   P = 1128.30
+
+function calculateYears(principal, interest, tax, desired) {
+  for (var i=0; principal<desired; i++) {
+    principal = (principal + principal*interest) - (principal*interest)*tax
+  }
+  return i;
+}
+
+//while loop
+function calculateYears(principal, interest, tax, desired) {
+    var years = 0;
+    while(principal < desired){
+      principal += (principal * interest) * (1 - tax);
+      years++;
+    }
+    return years;
+}
+
+//clever
+function calculateYears(principal, interest, tax, desired) {
+  return Math.ceil(
+    Math.log(desired / principal) /
+    Math.log(1 + interest * (1 - tax))
+  );
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
