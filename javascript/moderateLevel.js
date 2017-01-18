@@ -61,3 +61,162 @@ function accum(s) {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Some numbers have funny properties. For example:
+//
+// 89 --> 8¹ + 9² = 89 * 1
+//
+// 695 --> 6² + 9³ + 5⁴= 1390 = 695 * 2
+//
+// 46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+// Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p we want to find a positive integer k, if it exists, such as the sum of the digits of n taken to the successive powers of p is equal to k * n. In other words:
+//
+// Is there an integer k such as : (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n * k
+// If it is the case we will return k, if not return -1.
+//
+// Note: n, p will always be given as strictly positive integers.
+//
+// digPow(89, 1) should return 1 since 8¹ + 9² = 89 = 89 * 1
+// digPow(92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 * k
+// digPow(695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 * 2
+// digPow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+
+function digPow(n, p){
+  var k = n.toString().split('').map((x,i)=>Math.pow(x,(i+p))).reduce((a,b)=>a+b)/n
+  return k%1===0?k:-1
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+// The new "Avengers" movie has just been released! There are a lot of people at the cinema box office standing in a huge line. Each of them has a single 100, 50 or 25 dollars bill. A "Avengers" ticket costs 25 dollars.
+//
+// Vasya is currently working as a clerk. He wants to sell a ticket to every single person in this line.
+//
+// Can Vasya sell a ticket to each person and give the change if he initially has no money and sells the tickets strictly in the order people follow in the line?
+//
+// Return YES, if Vasya can sell a ticket to each person and give the change. Otherwise return NO.
+//
+// Examples:
+//
+// // === JavaScript ==
+//
+// tickets([25, 25, 50]) // => YES
+// tickets([25, 100])
+//         // => NO. Vasya will not have enough money to give change to 100 dollars
+
+function tickets(p){
+  var vasya = {
+    two5: 0,
+    fiveO: 0,
+    hundO: 0
+  };
+
+  for (var i = 0; i < p.length; i++) {
+
+    if (p[i]===25) {
+      vasya.two5 += 1
+    } else if (p[i]===50) {
+      vasya.fiveO += 1
+      vasya.two5 -= 1
+    } else if (p[i]===100) {
+      if (vasya.fiveO){
+        vasya.fiveO-=1;
+        vasya.two5-=1
+      } else {
+        vasya.two5-=3
+      }
+        vasya.hundO += 1
+    }
+    if (vasya.two5<0||vasya.fiveO<0) {
+      return 'NO'
+    }
+  }
+  return 'YES'
+}
+
+//nice form
+function Clerk(name) {
+  this.name = name;
+
+  this.money = {
+    25 : 0,
+    50 : 0,
+    100: 0
+  };
+
+  this.sell = function(element, index, array) {
+    this.money[element]++;
+
+    switch (element) {
+      case 25:
+        return true;
+      case 50:
+        this.money[25]--;
+        break;
+      case 100:
+        this.money[50] ? this.money[50]-- : this.money[25] -= 2;
+        this.money[25]--;
+        break;
+    }
+    return this.money[25] >= 0;
+  };
+}
+
+function tickets(peopleInLine){
+  var vasya = new Clerk("Vasya");
+  return peopleInLine.every(vasya.sell.bind(vasya)) ? "YES" : "NO";
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Description:
+//
+// You are given an array (which will have a length of at least 3, but could be very large) containing integers. The array is either entirely comprised of odd integers or entirely comprised of even integers except for a single integer N. Write a method that takes the array as an argument and returns N.
+//
+// For example:
+//
+// [2, 4, 0, 100, 4, 11, 2602, 36]
+//
+// Should return: 11
+//
+// [160, 3, 1719, 19, 11, 13, -21]
+//
+// Should return: 160
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////

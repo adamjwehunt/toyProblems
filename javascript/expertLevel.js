@@ -39,3 +39,51 @@ var sum_pairs=function(ints, s){
     }
   return results;
 };
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Pascal's Triangle
+function pascalsTriangle(n) {
+  console.log(n)
+  var triangle = [[1]],
+      results = [],
+      level;
+
+  for (var i=0; i<n-1; i++) {
+    level = [1];
+    for (var j = 1; j < triangle[i].length; j++) {
+      level[j] = triangle[i][j] + triangle[i][j-1];
+    }
+    level.push(1);
+    triangle.push(level)
+  }
+
+  triangle.map(x=>results.push(x))
+  return results
+}
+
+//recursion
+function pascalsTriangle(n) {
+  if (n === 1) {
+    return [1];
+  }
+  var prev = pascalsTriangle(n - 1), len = prev.length;
+  prev.push(1);
+  for (var i = len - n + 1; i < len - 1; i ++) {
+    prev.push(prev[i] + prev[i + 1]);
+  }
+  prev.push(1);
+  return prev;
+}
+
+//
+
+function pascalsTriangle(n) {
+    for (var i = 0, ret = []; i < n; i++) for (var j = 0; j <= i; j++) ret.push(row(i, j));
+    return ret;
+}
+function row(n, k) { return (k == 0 || n == k) ?1 :row(n - 1, k - 1) + row(n - 1, k); }
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
