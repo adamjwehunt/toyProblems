@@ -187,11 +187,42 @@ function tickets(peopleInLine){
 // Should return: 160
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Directions reduction
+// … a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too. Going to one direction and coming back the opposite direction is a needless effort. Since this is the wild west, with dreadfull weather and not much water, it's important to save yourself some energy, otherwise you might die of thirst!
+//
+// Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
+//
+// ex:
+// Test.assertSimilar(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]), ["WEST"])
+// Test.assertSimilar(dirReduc(["NORTH", "WEST", "SOUTH", "EAST"]), ["NORTH", "WEST", "SOUTH", "EAST"])
+// Test.assertSimilar(dirReduc(["NORTH", "SOUTH", "EAST", "WEST", "EAST", "WEST"]), [])
+
+//my answer
+const dirReduc = (arr) => {
+  for (var i = 0; i < arr.length - 1; i++) {
+    if (arr[i] !== arr[i+1] && arr[i].length === arr[i+1].length) {
+      arr.splice(i,2);
+      i = -1;
+    }
+  }
+  return arr;
+}
+
+//codewars top
+function dirReduc(plan) {
+  var opposite = {
+    'NORTH': 'SOUTH', 'EAST': 'WEST', 'SOUTH': 'NORTH', 'WEST': 'EAST'};
+  return plan.reduce(function(dirs, dir){
+      if (dirs[dirs.length - 1] === opposite[dir])
+        dirs.pop();
+      else
+        dirs.push(dir);
+      return dirs;
+    }, []);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
