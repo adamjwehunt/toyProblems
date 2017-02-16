@@ -56,3 +56,110 @@ const stitch = (left, right) => {
 }
 
 split(nums)
+
+
+
+//QUICKSORT
+
+//my solution
+var nums = [1,20,3,21,50,2,3,1,1,18,35,78,64,32]
+
+const quickSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr
+  }
+
+  const pivot = arr[arr.length-1],
+        left = [],
+        right = [],
+        middle = []
+
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] < pivot) {
+        left.push(arr[i])
+      } else if (arr[i] > pivot) {
+        right.push(arr[i])
+      } else {
+        middle.push(arr[i])
+      }
+    }
+
+    console.log(left, right, middle)
+
+  return [...quickSort(left), ...middle, ...quickSort(right)]
+}
+
+quickSort(nums)
+
+
+
+///answer
+
+var nums = [1,20,3,21,50,2,3,1,1,18,35,78,64,32]
+
+const quickSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr
+  }
+
+  const pivot = arr[arr.length-1],
+        left = [],
+        right = [];
+
+  for (let i = 0; i < arr.length-1; i++) {
+      if (arr[i] < pivot) {
+        left.push(arr[i])
+      } else {
+        right.push(arr[i])
+    }
+  }
+
+  console.log(left, right)
+
+  return [...quickSort(left), pivot, ...quickSort(right)]
+}
+
+quickSort(nums)
+
+
+
+////BOGOSORT  I did this just for fun. don't ever use this sort unless you have lots and lots of memory :D
+var nums = [1,20,3,21,50,2,3]
+
+function shuffle(array) {
+  let counter = array.length;
+
+  // While there are elements in the array
+  while (counter > 0) {
+      // Pick a random index
+      let index = Math.floor(Math.random() * counter);
+
+      // Decrease counter by 1
+      counter--;
+
+      // And swap the last element with it
+      let temp = array[counter];
+      array[counter] = array[index];
+      array[index] = temp;
+  }
+
+  return array;
+}
+
+const bogoSort = (arr) => {
+  const isSorted = (random) => {
+    for (let i = 0; i < random.length; i++) {
+      if (random[i] > random[i+1]) {
+        return false
+      }
+    }
+    return true
+  }
+  if (isSorted(arr)) {
+    return arr
+  }
+  let random = shuffle(arr)
+  return bogoSort(arr)
+}
+
+bogoSort(nums)
