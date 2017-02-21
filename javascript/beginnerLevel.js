@@ -1013,30 +1013,156 @@ function findOutlier(integers){
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from a to m.
+//
+// The colors used by the printer are recorded in a control string. For example a "good" control string would be aaabbbbhaijjjm meaning that the printer used three times color a, four times color b, then one time color a...
+//
+// Sometimes there are problems: lack of colors, technical malfunction and a "bad" control string is produced e.g. aaaxbbbbyyhwawiwjjjwwm.
+//
+// You have to write a function printer_error which given a string will output the error rate of the printer as a string representing a rational whose numerator is the number of errors and the denominator the length of the control string. Don't reduce this fraction to a simpler expression.
+//
+// The string has a length greater or equal to one and contains only letters from ato z.
+
+printerError = (n) => {
+  let numerator = 0,
+      badLetters = ['n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  for (let i = 0; i <= n.length; i++) {
+    if (badLetters.indexOf(n[i]) !== -1) {
+      numerator++
+    }
+  }
+  return numerator + '/' + n.length
+}
+
+//regex
+function printerError(s) {
+    return s.match(/[^a-m]/g).length + "/" + s.length;
+}
+
+//best non-regex answer (uses unicode to 'rank' letters)
+function printerError(s) {
+  var count = 0;
+  for(var i = 0; i < s.length; i++) {
+    if (s[i] > "m") {
+      count++;
+    }
+  }
+  return count+"/"+s.length;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Don't give me five!
+//
+// In this kata you get the start number and the end number of a region and should return the count of all numbers except numbers with a 5 in it. The start and the end number are both inclusive!
+//
+// Examples:
+//
+// 1,9 -> 1,2,3,4,6,7,8,9 -> Result 8
+// 4,17 -> 4,6,7,8,9,10,11,12,13,14,16,17 -> Result 12
+// The result may contain fives. ;-)
+// The start number will always be smaller than the end number. Both numbers can be also negative!
+//
+// I'm very curious for your solutions and the way you solve it. Maybe someone of you will find an easy pure mathematics solution.
+//
+// Have fun coding it and please don't forget to vote and rank this kata! :-)
+//
+// I have also created other katas. Take a look if you enjoyed this kata!
 
+dontGiveMeFive = (start, end) => {
+  let result = 0;
+  for (let i = start; i <= end; i++) {
+     if (i.toString().split('').indexOf('5')===-1){
+       result++
+     }
+  }
+  return result
+}
+
+//slim es6 things
+const dontGiveMeFive=(s,e)=>[...Array(e-s+1)].reduce((r,_,n)=>r+!/5/.test(n+s),0)
+
+//nice
+function dontGiveMeFive(start, end)
+{
+  return Array.from(Array(end-start+1),(e,i)=>i+start)
+          .filter((e)=>(''+e).indexOf('5')===-1)
+          .length;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Given an array of one's and zero's convert the equivalent binary value to an integer.
+//
+// Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1
 
+const binaryArrayToNumber = arr => parseInt(arr.join(''), 2);
+
+//codewars
+function binaryArrayToNumber(arr) {
+  return arr.reduce( (a, b) => a << 1 | b );
+}
+
+//shows the magic
+const binaryArrayToNumber = arr =>
+ ((arr[0]) ? 8 : 0) +
+ ((arr[1]) ? 4 : 0) +
+ ((arr[2]) ? 2 : 0) +
+ ((arr[3]) ? 1 : 0);
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Make a program that filters a list of strings and returns a list with only your friends name in it.
+//
+// If a name has 4 letters in it, you can be sure that it has to be a friend of yours!
+//
+// Ex: Input = ["Ryan", "Kieran", "Jason", "Yous"], Output = ["Ryan", "Yous"]
 
+friend=f=>f.filter(x=>x.length==4)
+
+//best read
+function friend(friends){
+  return friends.filter(n => n.length === 4)
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Find the smallest integer in the array.
+//
+// Given an array of integers your solution should find the smallest integer. For example:
+// Given [34, 15, 88, 2] your solution will return 2
+// Given [34, -345, -1, 100] your solution will return -345
+//
+// You can assume, for the purpose of this kata, that the supplied array will not be empty.
 
 
+class SmallestIntegerFinder {
+  findSmallestInt(args) {
+    return Math.min(...args)
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Your online store likes to give out coupons for special occasions. Some customers try to cheat the system by entering invalid codes or using expired coupons.
+//
+// Your mission:
+// Write a function called checkCoupon to verify that a coupon is valid and not expired. If the coupon is good, return true. Otherwise, return false.
+//
+// A coupon expires at the END of the expiration date. All dates will be passed in as strings in this format: "June 15, 2014"
+
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
+  currentDate = new Date(currentDate)
+  expirationDate = new Date(expirationDate)
+  return (currentDate <= expirationDate) && enteredCode===correctCode
+}
+//slimmed down
+const checkCoupon = (eC, cC, cD, eD) => new Date(cD) <= new Date(eD) && eC===cC
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
