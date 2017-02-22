@@ -1163,6 +1163,151 @@ function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
 //slimmed down
 const checkCoupon = (eC, cC, cD, eD) => new Date(cD) <= new Date(eD) && eC===cC
 
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// You have a sequence of positive numbers starting with 1, but one number is missing!
+//
+// Find out the missing number; if the sequence is not broken, you should return 0. Each sequence always increments by 1.
+//
+// In short: an invalid sequence (a string with non numeric character) must return 1, an already complete (or empty) sequence must return 0; a broken sequence with more than one number missing should return the lowest missing number; otherwise return the missing number.
+//
+// Note that the input may be with random order.
+//
+// E.g.
+//
+// findMissingNumber("1 3 2 5") // returns 4, because 4 is missing
+// findMissingNumber("1 2 3 4") // returns 0, because the sequence isn't broken
+// findMissingNumber("1 5") // returns 2, because the sequence is missing more than one number and 2 is the lowest between 2, 3 and 4
+// findMissingNumber("2 1 4 3 a") // returns 1, because it's an invalid sequence. in this case, it's invalid because contain a non numerical character
+const findMissingNumber = (s) => {
+  if (s==='') return 0;
+  s = s.split(' ').sort((a,b)=>a-b).map(x=>parseInt(x));
+  console.log(s)
+  if (s.includes(NaN)) return 1
+  if (s[0]!==1) return 1
+  if (s[s.length-1]!==s.length) {
+    for (let i = 0; i <s.length-1; i++) {
+      if (s[i+1]!==s[i]+1) {
+        return s[i]+1
+      }
+    }
+  }
+  return 0
+}
+
+//codewars top
+function findMissingNumber(sequence){
+  if (sequence === "") return 0;
+  if (!/^(\d+ )+\d+$/gi.test(sequence)) return 1;
+  var arr = sequence.split(' ').map(x => +x);
+  var max = Math.max(...arr);
+  for(var i = 1; i < max; ++i)
+    if (arr.find(x => x == i) == undefined) return i;
+  return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Take an integer n (n >= 0) and a digit d (0 <= d <= 9) as an integer. Square all numbers k (0 <= k <= n) between 0 and n. Count the numbers of digits d used in the writing of all the k**2. Call nb_dig (or nbDig or ...) the function taking n and d as parameters and returning this count.
+//
+// Examples:
+//
+// n = 10, d = 1, the k*k are 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100
+// We are using the digit 1 in 1, 16, 81, 100. The total count is then 4.
+//
+// nb_dig(25, 1):
+// the numbers of interest are
+// 1, 4, 9, 10, 11, 12, 13, 14, 19, 21 which squared are 1, 16, 81, 100, 121, 144, 169, 196, 361, 441
+// so there are 11 digits `1` for the squares of numbers between 0 and 25.
+// Note that 121 has twice the digit 1
+
+const nbDig = (n, d) => {
+  let result;
+  d===0?result=1:result=0
+  n = [...Array(n).keys()].map(x=>{
+  let y = (x+1)*(x+1)
+  result += y.toString().split('').filter(x=>x===d.toString()).length
+  })
+  return result
+}
+
+//codewars
+function nbDig(n, d) {
+var res=0;
+    for (var g=0;g<=n;g++){
+      var square=(g*g+"").split("");
+      square.forEach((s)=>s==d?res++:null)
+    }return res;
+}
+
+//regex
+const nbDig = (n, d) => {
+  let re = new RegExp(d, 'g');
+  return Array(...Array(n + 1))
+    .reduce((s, v, i) => s + ((i * i + '').match(re) || []).length, 0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Suppose we could access yesterday's stock prices as an array, where:
+//
+// The values are the price in dollars of Apple stock.
+// A higher index indicates a later time.
+// So if the stock cost $500 at 10:30am and $550 at 11:00am, then:
+//
+// stockPricesYesterday[60] = 500;
+//
+// Write an efficient function that takes stockPricesYesterday and returns the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
+//
+// For example:
+//
+//   var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
+//
+// getMaxProfit(stockPricesYesterday);
+// // returns 6 (buying for $5 and selling for $11)
+
+var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
+
+const getMaxProfit = (arr) => {
+  let margins = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      margins.push(arr[j]-arr[i])
+    }
+  }
+  return Math.max(...margins)
+}
+
+getMaxProfit(stockPricesYesterday);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Write a function getProductsOfAllIntsExceptAtIndex() that takes an array of integers and returns an array of the products.
+//
+// For example, given:
+//
+//   [1, 7, 3, 4]
+//
+// your function would return:
+//
+//   [84, 12, 28, 21]
+//
+// by calculating:
+//
+//   [7 * 3 * 4,  1 * 3 * 4,  1 * 7 * 4,  1 * 7 * 3]
+
+
+let nums = [1, 7, 3, 4]
+
+const gPOAIEAI = (arr) => arr.map((x,i) =>[...arr.slice(0,i), ...arr.slice(i+1)].reduce((a,b)=>a*b))
+
+gPOAIEAI(nums)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1177,6 +1322,101 @@ const checkCoupon = (eC, cC, cD, eD) => new Date(cD) <= new Date(eD) && eC===cC
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
