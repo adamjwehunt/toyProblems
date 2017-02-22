@@ -1282,7 +1282,43 @@ const getMaxProfit = (arr) => {
 }
 
 getMaxProfit(stockPricesYesterday);
+///////////
 
+function getMaxProfit(stockPricesYesterday) {
+
+  // make sure we have at least 2 prices
+  if (stockPricesYesterday.length < 2) {
+      throw new Error('Getting a profit requires at least 2 prices');
+  }
+
+  // we'll greedily update minPrice and maxProfit, so we initialize
+  // them to the first price and the first possible profit
+  var minPrice = stockPricesYesterday[0];
+  var maxProfit = stockPricesYesterday[1] - stockPricesYesterday[0];
+
+  // start at the second (index 1) time
+  // we can't sell at the first time, since we must buy first,
+  // and we can't buy and sell at the same time!
+  // if we started at index 0, we'd try to buy *and* sell at time 0.
+  // this would give a profit of 0, which is a problem if our
+  // maxProfit is supposed to be *negative*--we'd return 0!
+  for (var i = 1; i < stockPricesYesterday.length; i++) {
+      var currentPrice = stockPricesYesterday[i];
+
+      // see what our profit would be if we bought at the
+      // min price and sold at the current price
+      var potentialProfit = currentPrice - minPrice;
+
+      // update maxProfit if we can do better
+      maxProfit = Math.max(maxProfit, potentialProfit);
+
+      // update minPrice so it's always
+      // the lowest price we've seen so far
+      minPrice = Math.min(minPrice, currentPrice);
+  }
+
+  return maxProfit;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1309,11 +1345,96 @@ const gPOAIEAI = (arr) => arr.map((x,i) =>[...arr.slice(0,i), ...arr.slice(i+1)]
 
 gPOAIEAI(nums)
 
+////
+
+function getProductsOfAllIntsExceptAtIndex(intArray) {
+
+  var productsOfAllIntsExceptAtIndex = [];
+
+  // for each integer, we find the product of all the integers
+  // before it, storing the total product so far each time
+  var productSoFar = 1;
+  for (var i = 0; i < intArray.length; i++) {
+      productsOfAllIntsExceptAtIndex[i] = productSoFar;
+      productSoFar *= intArray[i];
+  }
+
+  // for each integer, we find the product of all the integers
+  // after it. since each index in products already has the
+  // product of all the integers before it, now we're storing
+  // the total product of all other integers
+  productSoFar = 1;
+  for (var j = intArray.length - 1; j >= 0; j--) {
+      productsOfAllIntsExceptAtIndex[j] *= productSoFar;
+      productSoFar *= intArray[j];
+  }
+
+  return productsOfAllIntsExceptAtIndex;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Given an arrayOfInts, find the highestProduct you can get from three of the integers.
+// The input arrayOfInts will always have at least three integers.
 
+function highestProductOf3(arrayOfInts) {
+  if (arrayOfInts.length < 3) {
+      throw new Error('Less than 3 items!');
+  }
+
+  // We're going to start at the 3rd item (at index 2)
+  // so pre-populate highests and lowests based on the first 2 items.
+  // we could also start these as null and check below if they're set
+  // but this is arguably cleaner
+  var highest = Math.max(arrayOfInts[0], arrayOfInts[1]);
+  var lowest  = Math.min(arrayOfInts[0], arrayOfInts[1]);
+
+  var highestProductOf2 = arrayOfInts[0] * arrayOfInts[1];
+  var lowestProductOf2  = arrayOfInts[0] * arrayOfInts[1];
+
+  // except this one--we pre-populate it for the first *3* items.
+  // this means in our first pass it'll check against itself, which is fine.
+  var highestProductOf3 = arrayOfInts[0] * arrayOfInts[1] * arrayOfInts[2];
+
+  // walk through items, starting at index 2
+  for (var i = 2; i < arrayOfInts.length; i++) {
+      var current = arrayOfInts[i];
+
+      // do we have a new highest product of 3?
+      // it's either the current highest,
+      // or the current times the highest product of two
+      // or the current times the lowest product of two
+      highestProductOf3 = Math.max(
+          highestProductOf3,
+          current * highestProductOf2,
+          current * lowestProductOf2
+      );
+
+      // do we have a new highest product of two?
+      highestProductOf2 = Math.max(
+          highestProductOf2,
+          current * highest,
+          current * lowest
+      );
+
+      // do we have a new lowest product of two?
+      lowestProductOf2 = Math.min(
+          lowestProductOf2,
+          current * highest,
+          current * lowest
+      );
+
+      // do we have a new highest?
+      highest = Math.max(highest, current);
+
+      // do we have a new lowest?
+      lowest = Math.min(lowest, current);
+  }
+
+  return highestProductOf3;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
