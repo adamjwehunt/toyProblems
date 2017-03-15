@@ -1468,21 +1468,105 @@ function solution(str, ending){
 
 ////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////
+// Complete the keysAndValues function so that it takes in an object and returns the keys and values as separate arrays.
+//
+// Example:
+//
+// keysAndValues({a: 1, b: 2, c: 3}) // should return [['a', 'b', 'c'], [1, 2, 3]]
+
+const keysAndValues = (data) => {
+  let props = [],
+      values = []
+  for (prop in data) {
+    props.push(prop)
+    values.push(data[prop])
+  }
+  return [props, values]
+}
+
+
+//codewars
+function keysAndValues(data){
+    var arr = [];
+    arr.push(Object.keys(data));
+    arr.push(Object.keys(data).map(function(x){return data[x]}))
+    return arr
+}
+//
+function keysAndValues(data){
+  return [Object.keys(data), Object.keys(data).map(function (key) { return data[key]; })];
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
+//
+// For example:
+//
+// solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
+// solution(null); // should return []
+
+const solution=(nums)=>nums===null?[]:nums.sort((a,b)=>a-b)
+
+//
+function solution(nums){
+  return (nums || []).sort(function(a, b){
+    return a - b
+  });
+}
+
+//
+function solution(nums){
+    return nums !== null ? nums.sort(function(a,b){return a-b}) : [];
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////
+// Write a function that flattens an Array of Array objects into a flat Array. Your function must only do one level of flattening.
+//
+// flatten([1,2,3]) // => [1,2,3]
+// flatten([[1,2,3],["a","b","c"],[1,2,3]])  // => [1,2,3,"a","b","c",1,2,3]
+// flatten([[[1,2,3]]]) // => [[1,2,3]]
 
+const flatten = (arrs) => [].concat(...arrs)
+
+//
+var flatten = function (lol){
+  return [].concat.apply([],lol);
+}
+
+//
+var flatten = function (array){
+  return array.reduce(function(a,z) {
+    return a.concat(z);
+  }, []);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Instructions
+//
+// Write a function that takes a single string (word) as argument. The function must return an ordered list containing the indexes of all capital letters in the string.
+//
+// Example
+//
+// Test.assertSimilar( capitals('CodEWaRs'), [0,3,4,6] );
 
+const capitals=(w)=> {
+  let results = []
+  w.split('').map((x,i)=>{
+    if (x===x.toUpperCase()){
+      results.push(i)
+    }
+  })
+  return results
+}
 
+//rege
+const capitals = word => { return word.match(/[A-Z]/g).map( x => { return word.indexOf(x) }) }
 
 ////////////////////////////////////////////////////////////////////////////////
 
