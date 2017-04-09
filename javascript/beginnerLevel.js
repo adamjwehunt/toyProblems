@@ -1611,28 +1611,104 @@ function longestConsec(strarr, k) {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Story
+//
+// Ben has a very simple idea to make some profit: he buys something and sells it again. Of course, this wouldn't give him any profit at all if he was simply to buy and sell it at the same price. Instead, he's going to buy it for the lowest possible price and sell it at the highest.
+//
+// Task
+//
+// Write a function that returns both the minimum and maximum number of the given list/array.
+//
+// Examples
+//
+// minMax([1,2,3,4,5])   == [1,5]
+// minMax([2334454,5])   == [5, 2334454]
+// minMax([1])           == [1, 1]
 
+function minMax(arr){
+  return [Math.min(...arr),Math.max(...arr)];
+}
 
+// non-spread version
 
-
+function minMax(arr){
+  return [Math.min.apply(Math, arr), Math.max.apply(Math, arr)];
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Description:
+//
+// The numberOfOccurrences function must return the number of occurrences of an element in an array.
+//
+// var arr = [0,1,2,2,3];
+// arr.numberOfOccurrences(0) === 1;
+// arr.numberOfOccurrences(4) === 0;
+// arr.numberOfOccurrences(2) === 2;
+// arr.numberOfOccurrences("a") === 0;
 
+Array.prototype.numberOfOccurrences = function(num) {
+  return this.filter(x => x===num).length
+}
 
+//for loop
 
+Array.prototype.numberOfOccurrences = function (element) {
 
+    var counter = 0;
+    for (var i = 0; i < this.length; i++)
+    {
+        if (this[i] == element) { counter++; }
+    }
 
+    return counter;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Complete the function caffeineBuzz, which takes a non-zero integer as it's one argument.
+//
+// If the integer is divisible by 3, return the string "Java".
+//
+// If the integer is divisible by 3 and divisible by 4, return the string "Coffee"
+//
+// If the integer is one of the above and is even, add "Script" to the end of the string.
+//
+// Otherwise, return the string "mocha_missing!"
+//
+// caffeineBuzz(1)   => "mocha_missing!"
+// caffeineBuzz(3)   => "Java"
+// caffeineBuzz(6)   => "JavaScript"
+// caffeineBuzz(12)  => "CoffeeScript"
 
+function caffeineBuzz(n){
+  var result
+  if (n % 3 === 0) {
+    if (n % 4 === 0) {
+      result = "Coffee"
+    } else {
+      result = "Java"
+    }
+    return n % 2 === 0 ? `${result}Script` : result
+  } else {
+    return "mocha_missing!"
+  }
+}
+//es6 shenanigans
+const caffeineBuzz=(n)=>n%12==0?"CoffeeScript":n%6==0?"JavaScript":n%3==0?"Java":"mocha_missing!"
+//even more :P
+var j = "Java", s = "Script"
+const caffeineBuzz=(n)=>n%12==0?`Coffee${s}`:n%6==0?j+s:n%3==0?j:"mocha_missing!"
 
-
-
-
+//simple
+function caffeineBuzz(n){
+  if (n % 12 === 0) return "CoffeeScript";
+  if (n % 6 === 0) return "JavaScript";
+  if (n % 3 === 0)  return "Java";
+  return "mocha_missing!";
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
