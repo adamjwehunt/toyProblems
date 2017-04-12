@@ -1713,46 +1713,111 @@ function caffeineBuzz(n){
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
+// Jenny has written a function that returns a greeting for a user. However, she's in love with Johnny, and would like to greet him slightly different. She added a special case to her function, but she made a mistake.
+//
+// Can you help her?
+function greet(name){
+  if(name === "Johnny") {
+    return "Hello, my love!";
+  } else {
+    return "Hello, " + name + "!";
+  }
+}
+//cool way to rewrite this..
+function greet(name){
+  return "Hello, " + (name == "Johnny" ? "my love" : name) + "!";
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Description:
+//
+// Complete the function so that it returns the number of seconds that have elapsed between the start and end times given.
 
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-
+function elapsedSeconds(startDate, endDate){
+  return  (endDate - startDate)/1000
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
+// Description:
+//
+// Write a function named sumDigits which takes a number as input and returns the sum of the absolute value of each of the number's decimal digits. For example:
+//
+//   sumDigits(10);  // Returns 1
+//   sumDigits(99);  // Returns 18
+//   sumDigits(-32); // Returns 5
+// Let's assume that all numbers in the input will be integer values.
+function sumDigits(n) {
+  return n.toString().split('').filter(x=>x!=='-').reduce((a,b)=>parseInt(a)+parseInt(b),0)
+}
+//this takes care of the negative
+function sumDigits(number) {
+  return Math.abs(number).toString().split('').reduce(function(a,b){return +a + +b}, 0);
+}
 
+////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////
+// Description:
+//
+// Complete the function circleArea so that it will return the area of a circle with the given radius. Round the returned number to two decimal places (except for Haskell). If the radius is not positive or not a number, return false.
+//
+// Example:
+//
+// circleArea(-1485.86);    //returns false
+// circleArea(0);           //returns false
+// circleArea(43.2673);     //returns 5881.25
+// circleArea(68);          //returns 14526.72
+// circleArea("number");    //returns false
+const circleArea = (r) => r>0?Number((Math.PI * Math.pow(r, 2)).toFixed(2)):false
+
+// +
+var circleArea = function(radius) {
+  return radius > 0 ? +(radius*radius*Math.PI).toFixed(2) : false;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Description:
+//
+// Sum of 'n' Numbers
+//
+// sum_of_n (or SequenceSum.sumOfN in Java, SequenceSum.SumOfN in C#) takes an integer n and returns a List (an Array in Java/C#) of length abs(n) + 1. The List/Array contains the numbers in the arithmetic series produced by taking the sum of the consecutive integer numbers from 0 to n inclusive.
+//
+// n can also be 0 or a negative value.
+// Wikipedia reference for abs value is available here.
+//
+// Example:
+//
+// 5 -> [0, 1, 3, 6, 10, 15]
+//
+// -5 -> [0, -1, -3, -6, -10, -15]
+//
+// 7 -> [0, 1, 3, 6, 10, 15, 21, 28]
+function sumOfN(n) {
+  var a = []
+  var j = 0
+  for (let i = 1; i < Math.abs(n)+2; i++) {
+    a.push(j)
+    n<0?j=j-i:j=j+i
+  }
+  return a
+}
+
+//top
+function sumOfN(n) {
+  var array = [];
+  array[0] = 0;
+  for (var i = 1; i < Math.abs(n)+1; i++) {
+    if (n > 0) array[i] = array[i-1]+i;
+    else array[i] = array[i-1]-i;
+  }
+  return array;
+};
 
 
 
