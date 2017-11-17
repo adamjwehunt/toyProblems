@@ -1,4 +1,4 @@
-a//BEGINNER LEVEL JS TOY PROBLEMS
+//BEGINNER LEVEL JS TOY PROBLEMS
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1885,18 +1885,75 @@ function comparator(word, nextWord) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
+
+// The input to the function will be an array of three distinct numbers (Haskell: a tuple).
+
+// For example:
+
+// gimme([2, 3, 1]) => 0
+
+const gimme = function(nums) {
+  let result = 'Invalid input';
+  
+  if (Array.isArray(nums) && nums.length === 3) {
+    const sorted = [...nums].sort((a,b) => a - b);
+    const middleNum = sorted[1]
+    result = nums.indexOf(middleNum)
+  }
+
+  return result;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
+
+// The input to the function will be an array of three distinct numbers (Haskell: a tuple).
+
+// For example:
+
+// gimme([2, 3, 1]) => 0
+
+const gimme = function(nums) {
+  let result = 'Invalid input';
+  
+  if (Array.isArray(nums) && nums.length === 3) {
+    const sorted = [...nums].sort((a,b) => a - b);
+    const middleNum = sorted[1]
+    result = nums.indexOf(middleNum)
+  }
+
+  return result;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// As a part of this Kata, you need to create a function that when provided with a triplet, returns the index of the numerical element that lies between the other two elements.
+
+// The input to the function will be an array of three distinct numbers (Haskell: a tuple).
+
+// For example:
+
+// gimme([2, 3, 1]) => 0
+
+const gimme = function(nums) {
+  let result = 'Invalid input';
+  
+  if (Array.isArray(nums) && nums.length === 3) {
+    const sorted = [...nums].sort((a,b) => a - b);
+    const middleNum = sorted[1]
+    result = nums.indexOf(middleNum)
+  }
+
+  return result;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
